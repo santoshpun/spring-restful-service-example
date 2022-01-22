@@ -15,33 +15,36 @@ public class ProjectRepository {
 
     public List<Project> getAllProjects() {
 
-        Project project1 = new Project();
-        project1.setId(1);
-        project1.setCode("ECOMMERCE");
-        project1.setName("Ecommerce app");
-        project1.setDescription("Ecommerce app for groceries items");
-        project1.setAddedDate(new Date());
-        project1.setOwner("Santosh Pun");
-        project1.setProjectType(ProjectType.NEW_PRODUCT);
-        project1.setPercentageComplete(0);
-        project1.setStartDate(new Date());
-        project1.setEndDate(this.addMonths(6));
+        if (projects.isEmpty()) {
 
-        projects.add(project1);
+            Project project1 = new Project();
+            project1.setId(1);
+            project1.setCode("ECOMMERCE");
+            project1.setName("Ecommerce app");
+            project1.setDescription("Ecommerce app for groceries items");
+            project1.setAddedDate(new Date());
+            project1.setOwner("Santosh Pun");
+            project1.setProjectType(ProjectType.NEW_PRODUCT);
+            project1.setPercentageComplete(0);
+            project1.setStartDate(new Date());
+            project1.setEndDate(this.addMonths(6));
 
-        Project project2 = new Project();
-        project2.setId(2);
-        project2.setCode("ONLINE_COURSE");
-        project2.setName("Online Course app");
-        project2.setDescription("Online course platform");
-        project2.setAddedDate(new Date());
-        project2.setOwner("Santosh Pun");
-        project2.setProjectType(ProjectType.NEW_PRODUCT);
-        project2.setPercentageComplete(0);
-        project2.setStartDate(new Date());
-        project2.setEndDate(this.addMonths(12));
+            projects.add(project1);
 
-        projects.add(project2);
+            Project project2 = new Project();
+            project2.setId(2);
+            project2.setCode("ONLINE_COURSE");
+            project2.setName("Online Course app");
+            project2.setDescription("Online course platform");
+            project2.setAddedDate(new Date());
+            project2.setOwner("Santosh Pun");
+            project2.setProjectType(ProjectType.NEW_PRODUCT);
+            project2.setPercentageComplete(0);
+            project2.setStartDate(new Date());
+            project2.setEndDate(this.addMonths(12));
+
+            projects.add(project2);
+        }
 
         return projects;
     }

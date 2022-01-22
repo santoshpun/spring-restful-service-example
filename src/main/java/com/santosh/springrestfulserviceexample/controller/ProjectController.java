@@ -40,7 +40,7 @@ public class ProjectController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteProject(@PathVariable(name = "id") int id) {
+    public ResponseEntity<Void> deleteProject(@PathVariable(name = "id") int id) {
         projectService.deleteProject(id);
         return ResponseEntity.noContent().build();
     }
