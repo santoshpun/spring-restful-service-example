@@ -15,7 +15,7 @@ public class Example1Controller {
         return "Welcome to RESTful service world !!";
     }
 
-    @RequestMapping(value = "users", method = RequestMethod.POST)
+    @RequestMapping(value = "users/create", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.CREATED)
     public User saveUser(@RequestBody User userRequest) {
         log.info("User saved successfully...");
@@ -30,9 +30,20 @@ public class Example1Controller {
     }
 
     //Path variable with different name
-    @RequestMapping(value = "users/get/{id}", method = RequestMethod.GET)
-    public User getUser(@PathVariable("id") int userId) {
+    @RequestMapping(value = "users/getUser/{id}", method = RequestMethod.GET)
+    public User getUser(@PathVariable(name = "id") int userId) {
         return new User(userId);
+    }
+
+    //Path variable as optional
+    @RequestMapping(value = {"userInfo","userInfo/{userId}"}, method = RequestMethod.GET)
+    public User getUserObj(@PathVariable(name = "userId", required = false) Integer userId) {
+        log.info("User id : " + userId);
+        if (userId != null) {
+            return new User(userId);
+        } else {
+            return new User(0);
+        }
     }
 
     @RequestMapping(value = "greet/name", method = RequestMethod.GET)
