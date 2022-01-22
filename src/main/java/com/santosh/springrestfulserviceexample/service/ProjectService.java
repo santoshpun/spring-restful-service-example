@@ -33,4 +33,9 @@ public class ProjectService {
 
         return project;
     }
+
+    public boolean deleteProject(int id){
+        projectRepository.deleteProjectById(id);
+        return true;
+    }
 }

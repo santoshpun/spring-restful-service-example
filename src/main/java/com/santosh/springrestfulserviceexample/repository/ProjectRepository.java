@@ -13,7 +13,7 @@ import java.util.List;
 public class ProjectRepository {
     private List<Project> projects = new ArrayList<>();
 
-    public List<Project> getAllProjects(){
+    public List<Project> getAllProjects() {
 
         Project project1 = new Project();
         project1.setId(1);
@@ -46,21 +46,39 @@ public class ProjectRepository {
         return projects;
     }
 
-    public Project findProjectById(int id){
-        for(Project project: projects){
-            if(project.getId() == id){
+    public Project findProjectById(int id) {
+        for (Project project : projects) {
+            if (project.getId() == id) {
                 return project;
             }
         }
         return null;
     }
 
-    public Project addProject(Project project){
+    public Project addProject(Project project) {
+        int projectId = 1;
+
+        if (projects.size() > 0) {
+            int recentProjectId = projects.get(projects.size() - 1).getId();
+            projectId = recentProjectId + 1;
+        }
+
+        project.setId(projectId);
         projects.add(project);
         return project;
     }
 
-    public Date  addMonths(int months)  {
+    public void deleteProjectById(int id) {
+        List<Project> projectList = new ArrayList<>();
+        for (Project project : projects) {
+            if (project.getId() != id) {
+                projectList.add(project);
+            }
+        }
+        this.projects = projectList;
+    }
+
+    public Date addMonths(int months) {
         Calendar cal = Calendar.getInstance();
         cal.add(Calendar.MONTH, months);
         return cal.getTime();

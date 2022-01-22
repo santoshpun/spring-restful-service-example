@@ -20,18 +20,28 @@ public class ProjectController {
     @GetMapping
     public ResponseEntity<List<Project>> getAllProjects() {
         List<Project> projects = projectService.fetchProjectList();
-        return new ResponseEntity<List<Project>>(projects, new HttpHeaders(), HttpStatus.OK);
+        return new ResponseEntity<>(projects, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Project> getProjectById(@PathVariable("id") int id) {
         Project project = projectService.getProject(id);
-        return new ResponseEntity<Project>(project, new HttpHeaders(), HttpStatus.OK);
+        return new ResponseEntity<>(project, HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<Project> addProject(@RequestBody Project project) {
         Project created = projectService.addProject(project.getName(), project.getDescription());
-        return new ResponseEntity<Project>(created, new HttpHeaders(), HttpStatus.CREATED);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("x-auth-token", "12345");
+
+        return new ResponseEntity<>(created, headers, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteProject(@PathVariable(name = "id") int id) {
+        projectService.deleteProject(id);
+        return ResponseEntity.noContent().build();
     }
 }
